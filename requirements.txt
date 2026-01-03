@@ -1,5 +1,0 @@
-aiogram==3.7.0
-yt-dlp
-aiohttp
-beautifulsoup4
-lxml
