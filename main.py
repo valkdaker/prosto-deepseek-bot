@@ -35,7 +35,7 @@ except ImportError as e:
     sys.exit(1)
 
 # ==================== КОНФИГУРАЦИЯ ====================
-BOT_TOKEN = "8567153378:AAEX5GRFscQPFj83pCnc5Y7MZjMM-x2Nk2o"  # Ваш токен
+BOT_TOKEN = "8567153378:AAHG0WXZDgI4gorGfa4a28xBHMgzg1KRmlY"  # Ваш токен
 DOWNLOAD_DIR = "downloads"
 MAX_FILE_SIZE = 20 * 1024 * 1024  # 20MB для хостинга
 MAX_DURATION = 180  # 3 минуты максимум для стабильности
