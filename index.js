@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 const ffmpeg = require('fluent-ffmpeg');
 
 // ==================== КОНФИГУРАЦИЯ ====================
-const BOT_TOKEN = process.env.BOT_TOKEN || '8567153378:AAEX5GRFscQPFj83pCnc5Y7MZjMM-x2Nk2o';
+const BOT_TOKEN = process.env.BOT_TOKEN || '8567153378:AAHG0WXZDgI4gorGfa4a28xBHMgzg1KRmlY';
 const DOWNLOAD_DIR = path.join(__dirname, 'downloads');
 const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50MB
 const MAX_DURATION = 300; // 5 минут
