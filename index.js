@@ -324,11 +324,12 @@ bot.on('message', async (msg) => {
     
     if (url.includes('youtube.com') || url.includes('youtu.be')) {
         // YouTube - показываем выбор формата
+        // Используем специальный разделитель "|||" чтобы избежать конфликта с двоеточиями в URL
         const keyboard = {
             inline_keyboard: [
                 [
-                    { text: '🎬 Видео (MP4)', callback_data: `video:${text}` },
-                    { text: '🎵 Аудио (MP3)', callback_data: `audio:${text}` }
+                    { text: '🎬 Видео (MP4)', callback_data: `video|||${text}` },
+                    { text: '🎵 Аудио (MP3)', callback_data: `audio|||${text}` }
                 ]
             ]
         };
@@ -381,7 +382,7 @@ bot.on('message', async (msg) => {
     }
 });
 
-// Обработчик callback кнопок
+// Обработчик callback кнопок (ИСПРАВЛЕННЫЙ)
 bot.on('callback_query', async (callbackQuery) => {
     const chatId = callbackQuery.message.chat.id;
     const messageId = callbackQuery.message.message_id;
@@ -389,7 +390,32 @@ bot.on('callback_query', async (callbackQuery) => {
     
     await bot.answerCallbackQuery(callbackQuery.id);
     
-    const [action, url] = data.split(':');
+    // Исправленный разбор данных с разделителем "|||"
+    const separator = '|||';
+    const separatorIndex = data.indexOf(separator);
+    
+    if (separatorIndex === -1) {
+        await bot.editMessageText(`❌ <b>Ошибка формата данных</b>`, {
+            chat_id: chatId,
+            message_id: messageId,
+            parse_mode: 'HTML'
+        });
+        return;
+    }
+    
+    const action = data.substring(0, separatorIndex);
+    const url = data.substring(separatorIndex + separator.length);
+    
+    // Проверяем корректность URL
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        await bot.editMessageText(`❌ <b>Ошибка:</b>\nНекорректный URL`, {
+            chat_id: chatId,
+            message_id: messageId,
+            parse_mode: 'HTML'
+        });
+        return;
+    }
+    
     const isAudio = action === 'audio';
     
     // Обновляем сообщение
