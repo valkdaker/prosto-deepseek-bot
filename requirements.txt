@@ -1,5 +1,5 @@
 aiogram==3.7.0
-yt-dlp==2024.11.11
-aiohttp==3.9.5
-beautifulsoup4==4.12.3
-lxml==5.2.1
+yt-dlp
+aiohttp
+beautifulsoup4
+lxml
